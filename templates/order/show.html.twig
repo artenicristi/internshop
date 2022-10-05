@@ -1,0 +1,92 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+    <body class="back-grey"></body>
+
+    <div class="row justify-content-between m-4">
+        <h1 style="color: whitesmoke">Order #{{ order.id }}</h1>
+        <div class="row justify-content-between align-self-center">
+            <a href="{{ path('admin.order.index') }}" class="btn btn-secondary ml-2 mr-2">Back to list</a>
+            {{ include('order/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    <table class="table text-white">
+        <tbody>
+            <tr>
+                <th class="label-color font-weight-normal">Total</th>
+                <td>${{ order.total }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Items</th>
+                <td>
+
+                    <table class="table table-borderless text-white">
+                        <thead style="color: rgb(225, 132, 95)">
+                            <tr>
+                                <th>Code</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for item in order.items %}
+                            <tr>
+                                <th class="font-weight-normal">{{ item.productCode }}</th>
+                                <th class="font-weight-normal">${{ item.price }}</th>
+                                <th class="font-weight-normal">{{ item.amount }}</th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Status</th>
+                <td>{{ order.status }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">CreatedAt</th>
+                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">UpdatedAt</th>
+                <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Country</th>
+                <td>{{ order.address.country }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">City</th>
+                <td>{{ order.address.city }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Street</th>
+                <td>{{ order.address.street }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">PostalCode</th>
+                <td>{{ order.address.postalCode }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Payment type</th>
+                <td>{{ order.paymentDetails.type }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Card code</th>
+                <td>{{ order.creditCardDetails.code }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Card cvv</th>
+                <td>{{ order.creditCardDetails.cvv }}</td>
+            </tr>
+            <tr>
+                <th class="label-color font-weight-normal">Card expiresAt</th>
+                <td>{{ order.creditCardDetails.expiresAt}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

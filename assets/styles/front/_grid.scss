@@ -1,0 +1,26 @@
+.grid {
+    .image-container {
+        height: 200px;
+        max-width: 100%;
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: $spacer;
+
+        .product-image {
+            position: relative;
+            width: 100%;
+            margin: auto;
+        }
+    }
+
+    a.btn i {
+        position: relative;
+        top: 0.3rem;
+    }
+
+    .pagination-row nav {
+        display: flex;
+        justify-content: end;
+    }
+}

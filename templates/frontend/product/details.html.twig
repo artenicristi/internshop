@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid my-5">
+        <div class="row">
+            {% for message in app.flashes('message') %}
+                <div class="alert alert-success" role="alert">{{ message }}</div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center align-items-center product">
+            <div class="col-5 text-center">
+                {% if (product.imageUrl)  %}
+                    <img class="img-fluid product-img" src="{{ asset('images/modified/' ~ product.imageUrl) }}" alt="">
+                {% else %}
+                    <img class="img-fluid product-img" src="{{ asset('images/noimage.jpeg') }} " alt="No image">
+                {% endif %}
+            </div>
+            <div class="col-5 text-center">
+                <div class="row my-5 justify-content-center">
+                    <div class="col">
+                        <div class="card border-0">
+                            <div class="card-header text-center bg-white border-2 border-dark">
+                                <h1>
+                                    <div class="display-2 font-weight-normal text-black">{{ product.name }}</div>
+                                </h1>
+                            </div>
+                            <div class="card-body text-center py-4">
+                                <h4 class="card-title product-category">{{ product.category }}</h4>
+                                <p class="lead card-subtitle product-code">Product code #{{ product.code }}</p>
+                                <p class="display-4 my-4 text-secondary fw-bold product-price">${{ product.price }}</p>
+                                <p class="card-text mx-5 text-muted d-none d-lg-block product-description">{{ product.description }}</p>
+                                <div class="row justify-content-center align-items-center my-5 ">
+                                    <button type="button"  data-storage="{{product | serialize('json', {groups: 'product:read'}) }}" class="btn btn-success float-right add-to-cart">
+                                        Add To Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

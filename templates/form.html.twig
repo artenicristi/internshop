@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h3>Create a product</h3>
+    <form action="{{ url('product.create', {'field' : 'value'}) }}" method='post'>
+        Will be sent to" . {{ url('product.create') }} . '<br>
+        <div>
+            <label for="title">
+                Title: <input type="text" name="title">
+            </label>
+        </div>
+        <div>
+            <label for="price">
+                Price: <input type="number" name="price">
+            </label>
+        </div>
+        <div>
+            <label for="description">
+                Description: <textarea name="description"></textarea>
+            </label>
+        </div>
+        <button type="submit">Submit me</button>
+    </form>
+{% endblock %}

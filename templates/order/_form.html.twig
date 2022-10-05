@@ -1,0 +1,132 @@
+<div class="container mb-5">
+    <div class="py-5 text-center">
+        <h2>Checkout</h2>
+        <p class="lead">Enter all the information order to complete the order, and you will receive a confirmation on your email after entering valid data and clicking on the submit button.</p>
+    </div>
+
+    {{ form_start(form, {action : path("cart.checkout")}) }}
+        <input type="hidden" name="token" value="{{ csrf_token('order') }}"/>
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your cart</span>
+                    <span class="badge badge-secondary badge-pill items-counter">3</span>
+                </h4>
+                <ul class="list-group items-list">
+                </ul>
+
+                <div class="list-group-item d-flex justify-content-between mb-3">
+                    <span>Total</span>
+                    <strong class="total-order">$20</strong>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">{{ button_label|default('Submit order') }}</button>
+            </div>
+
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Billing address</h4>
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    {% include 'errors.label.html.twig' with {'errors': form_errors(form.address.street)} %}
+                    {% include 'errors.input.html.twig' with {'errors': form_errors(form.address.street), 'input': form.address.street, 'isSubmitted': isSubmitted} %}
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="validationDefault03">City</label>
+                        {% include 'errors.label.html.twig' with {'errors': form_errors(form.address.city)} %}
+                        {% include 'errors.input.html.twig' with {'errors': form_errors(form.address.city), 'input': form.address.city, 'isSubmitted': isSubmitted} %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefault04">Country</label>
+                        {% include 'errors.label.html.twig' with {'errors': form_errors(form.address.country)} %}
+                        {% include 'errors.input.html.twig' with {'errors': form_errors(form.address.country), 'input': form.address.country, 'isSubmitted': isSubmitted} %}
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationDefault05">Postal code</label>
+                        {% include 'errors.label.html.twig' with {'errors': form_errors(form.address.postalCode)} %}
+                        {% include 'errors.input.html.twig' with {'errors': form_errors(form.address.postalCode), 'input': form.address.postalCode, 'isSubmitted': isSubmitted} %}
+                    </div>
+                </div>
+
+                <h4 class="mb-3">Payment method</h4>
+
+                <div class="d-block my-3">
+                    <div class="my-2">
+                        <div class="card">
+                            <div class="accordion" id="accordionPayment">
+
+                                <div class="card">
+                                    <div class="card-header p-0">
+                                        <h2 class="mb-0">
+                                                            {{form_widget(form.paymentDetails.type)}}
+
+                                             <button class="btn-cash btn btn-light btn-block text-left p-3 rounded-0"
+                                                    type="button">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                        Cash
+                                                     <img src="{{ asset('images/cash.png') }}" width="30">
+                                                 </div>
+                                             </button>
+                                        </h2>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header p-0" id="headingOnePayment">
+                                        <h2 class="mb-0">
+                                            <button class="btn-card btn btn-light btn-block text-left collapsed p-3 rounded-0"
+                                                    type="button" data-toggle="collapse" data-target="#collapseOnePayment"
+                                                    aria-expanded="false" aria-controls="collapseOnePayment">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                        Credit card
+                                                    <div class="icons">
+                                                        <img src="{{ asset('images/mastercard.png') }}" width="30">
+                                                        <img src="{{ asset('images/visa.png') }}" width="30">
+                                                        <img src="{{ asset('images/stripe.png') }}" width="30">
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseOnePayment" class="collapse" aria-labelledby="headingOne"
+                                         data-parent="#accordionPayment">
+                                        <div class="card-body" id="creditCardDetails">
+                                            <span class="font-weight-normal card-text">Card Number</span>
+                                            <div class="input">
+                                                <i class="gg-credit-card"></i>
+                                                {% include 'errors.label.html.twig' with {'errors': form_errors(form.creditCardDetails.code)} %}
+                                                {% include 'errors.input.html.twig' with {'errors': form_errors(form.creditCardDetails.code), 'input': form.creditCardDetails.code, 'isSubmitted': isSubmitted} %}
+                                            </div>
+                                            <div class="row mt-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <span class="font-weight-normal card-text">Expiry Date</span>
+                                                    <div class="input">
+                                                        <i class="gg-calendar-dates"></i>
+                                                        {% include 'errors.label.html.twig' with {'errors': form_errors(form.creditCardDetails.expiresAt)} %}
+                                                        {% include 'errors.input.html.twig' with {'errors': form_errors(form.creditCardDetails.expiresAt), 'input': form.creditCardDetails.expiresAt, 'isSubmitted': isSubmitted} %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="font-weight-normal card-text">CVC/CVV</span>
+                                                    <div class="input">
+                                                        <i class="gg-lock lock-icon" style="margin-top: 6px; top: -10px"></i>
+                                                        {% include 'errors.label.html.twig' with {'errors': form_errors(form.creditCardDetails.cvv)} %}
+                                                        {% include 'errors.input.html.twig' with {'errors': form_errors(form.creditCardDetails.cvv), 'input': form.creditCardDetails.cvv, 'isSubmitted': isSubmitted} %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        {# {{form_end(form)}} #}
+    </div>
+</form>

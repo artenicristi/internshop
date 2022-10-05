@@ -1,0 +1,10 @@
+[
+  {
+    "name": "matebook",
+    "price": 100,
+    "code": "WR-230",
+    "imageUrl": "matebook.jpg",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+    "category": "laptop"
+  }
+]

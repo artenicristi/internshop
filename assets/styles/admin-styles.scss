@@ -1,0 +1,107 @@
+@import "../../node_modules/css.gg/icons/all.css";
+@import "./variables";
+
+.sidebar {
+    background-color: rgba(47, 47, 47, 255);
+    height: 100vh;
+
+    a.nav-link {
+        color: rgba(117, 117, 118, 255)
+    }
+
+    a.nav-link:hover {
+        color: rgb(225, 132, 95)
+    }
+
+    .nav-title {
+        color: whitesmoke
+    }
+}
+.action-buttons{
+    a:hover{
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    i{
+        display: inline-flex;
+    }
+}
+
+.parent-field {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.child-field {
+    flex-basis: 100%;
+}
+
+.back-grey {
+    background-color: rgba(35, 35, 35, 255)
+}
+
+.label-color {
+    color: #909090;
+}
+
+.icon-color {
+    color: white;
+}
+
+.no-records {
+    height: 80vh;
+}
+
+
+.tooltip-img {
+    background: none;
+    position: relative;
+    display: inline-block;
+    font-size: 15px;
+    text-align: left;
+}
+
+.tooltip-img .tt-img {
+    visibility: hidden;
+    padding: 10px;
+    background: none;
+    position: absolute;
+    bottom: -340%;
+}
+
+.tooltip-img:hover .tt-img {
+    visibility: visible;
+}
+
+.pagination{
+    .active .page-link{
+        color: #232323;
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+    .disabled .page-link,
+    .page-link{
+        border: 1px solid #5f5f5f;
+        background-color: #343a40;
+        color: #ffc107;
+    }
+    .disabled .page-link{
+        color: #5f5f5f;
+    }
+}
+
+.menu-list{
+    li i {
+        color: $secondary;
+        width: 22px;
+        height: 20px;
+    }
+}
+
+//.lock-icon{
+//    margin-top: 6px !important;
+//    top: -10px !important;
+//}

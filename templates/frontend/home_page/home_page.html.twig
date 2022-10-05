@@ -1,0 +1,4 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'frontend/product/grid.html.twig' with {'productList' : productList, 'name': name} %}
+{% endblock %}

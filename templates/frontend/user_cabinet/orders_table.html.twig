@@ -1,0 +1,40 @@
+<h1 class="m-4 title">Orders</h1>
+
+<table class="table text-dark">
+    <thead class="thead-dark">
+    <tr class="text-center">
+        <th>Id</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>CreatedAt</th>
+        <th>UpdatedAt</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr class="text-center">
+            <td>{{ order.id }}</td>
+            <td>${{ order.total }}</td>
+            <td data-order-id="{{ order.id }}" data-field="status" >{{ order.status }}</td>
+            <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            <td>
+
+                <div class="row justify-content-center">
+                    <a href="{{ path('order.details', {'id': order.id}) }}" class="btn btn-primary text-white m-1">
+                        Details </a>
+                    {% if order.status != 'canceled' %}
+                        <a data-order-id="{{ order.id }}" class="btn btn-danger text-white m-1 cancel">Cancel</a>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">no orders yet</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+

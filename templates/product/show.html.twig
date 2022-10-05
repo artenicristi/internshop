@@ -1,0 +1,45 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+
+    <body class="back-grey"></body>
+    <div class="row justify-content-between m-4 align-items-center">
+        <h1 style="color: whitesmoke">Product #{{ product.id }}</h1>
+        <div class="row justify-content-end gap-3">
+            <a href="{{ path('app_product_index') }}" class="btn btn-secondary ml-2 mr-2">Back to list</a>
+            <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-secondary ml-2 mr-2">Edit</a>
+            {{ include('product/_delete_button_form.html.twig') }}
+        </div>
+    </div>
+
+    <table class="table text-white">
+        <tbody>
+            <tr>
+                <th class="font-weight-normal label-color">Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">Code</th>
+                <td>{{ product.code }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">Category</th>
+                <td>{{ product.category }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">CreatedAt</th>
+                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">UpdatedAt</th>
+                <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">Description</th>
+                <td>{{ product.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    {{ encore_entry_link_tags('admin') }}
+</head>
+<body>
+<div class="container-fluid" id="navbar-left">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-2 sidebar position-fixed">
+            <ul class="nav flex-column ml-4 mt-2 font-weight-normal menu-list">
+                <li class="nav-item"><h5 class="nav-link nav-title">Main menu</h5></li>
+                <li class="nav-item">
+                    <a href="{{ url('app_product_index') }}" class="nav-link d-flex">
+                        <i class="gg-list mr-3"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('app_category_index') }}" class="nav-link d-flex">
+                        <i class="gg-pocket mr-3"></i>
+                        Categories
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('app_user_index') }}" class="nav-link d-flex">
+                        <i class="gg-user-list mr-3"></i>
+                        Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin.order.index') }}" class="nav-link d-flex">
+                        <i class="gg-clipboard mr-3"></i>
+                        Orders
+                    </a>
+                </li>
+            </ul>
+            <div class="row justify-content-center">
+                <a href="{{ path('app_logout') }}" class="btn btn-danger" style="position: fixed; bottom: 20px; width: 120px">Logout</a>
+            </div>
+        </div>
+        <div class="col-10 mt-2 container-fluid">
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{{ encore_entry_script_tags('admin') }}
+</body>
+</html>
+
+

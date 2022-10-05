@@ -1,0 +1,79 @@
+{% block body %}
+
+<div class="container grid" >
+    <div class="row mt-5 mb-4 ">
+    <div class="col-lg-2 col-sm-6 mb-6">
+        {% include('frontend/product/filter_sidebar.html.twig') %}
+    </div>
+    <div class="col-md-9 search-result">
+        {% set total = 0 %}
+        {% for productCollection in productList %}
+            {% set total = total + productCollection|length %}
+        {% endfor %}
+
+        <h2>Products</h2>
+        {% if name is not null and total > 0 %}
+            <p>{{ total }} records found... </p>
+        {% endif %}
+    {% for productsCollection in productList %}
+    <div class="row mb-4">
+        {% for product in productsCollection %}
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-6">
+                <div class="product-cell card h-100">
+                    <div class="card-body">
+                    <div class="image-container">
+                        <a href="{{ path('product.details', {'id': product.id}) }}">
+                        
+                            {% if (product.imageUrl)  %}
+                                <img class="product-image product-img" src="{{ config.imagesBasePath ~ '/' ~ product.imageUrl }}" alt="">
+                            {% else %}
+                                <img class="product-image product-img" src="{{ asset(config.defaultImagePath) }} " alt="No image">
+                            {% endif %}
+                        </a>
+                    </div>
+                        <p class="card-title">
+                            <a class="product-name" href="{{ path('product.details', {'id': product.id}) }}">
+                                <strong>{{ product.name }}</strong>
+                            </a>
+                        </p>
+                            <div class="d-block mb-2 clearfix">
+                                <span class="float-left small product-code text-muted">{{ product.code}}</span>
+                                <span class="float-right product-price">
+                                    <strong>{{ product.price }} $</strong>
+                                </span>
+                            </div>
+                    {% if app.user and 'ROLE_ADMIN' in app.user.roles%}
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="button" class="btn btn-outline-primary add-to-cart mr-2"
+                                data-storage="{{product | serialize('json', {groups: 'product:read'}) }}">
+                                <i class="gg-shopping-cart"></i>
+                            </button>
+                            <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-primary p-3 mr-2">
+                                <i class="gg-pen"></i>
+                            </a>
+                            {% include 'product/_delete_trash_icon_form.html.twig'%}
+                        </div>
+                    {% else %}
+                        <button type="button"
+                            data-storage="{{product | serialize('json', {groups: 'product:read'}) }}"
+                            class="btn w-100 btn-outline-primary add-to-cart">Add To Cart</button>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+            <p class="alert alert-info no-records">
+             No records found... <a href="#" onclick="window.history.back()">Let's go back</a>
+            </p>
+    {% endfor %}
+        <div class="pagination-row">
+            {{ knp_pagination_render(paginator) }}
+        </div>
+    </div>
+</div>
+
+
+</div>
+{% endblock %}

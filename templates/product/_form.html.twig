@@ -1,0 +1,85 @@
+{{ form_start(form) }}
+{{ form_row(form._token) }}
+
+<div class="container-fluid my-4">
+
+    <div class="text-center">
+        {% if product.id is not null %}
+            <h2>Product #{{ product.id }}</h2>
+        {% else %}
+            <h2>Create new Product</h2>
+        {% endif %}
+
+        <p class="lead">You can {{ action }} the information about this product</p>
+    </div>
+
+    <div class="row justify-content-center my-5">
+        <div class="col-6">
+
+            <form >
+                <label class="form-label">Name:</label>
+                {% include 'errors.label.html.twig' with {'errors': form_errors(form.name)} %}
+                <div class="mb-4 parent-field">
+                  <span class="input-group-text">
+                    <i class="fa fa-bookmark"></i>
+                  </span>
+                    {% include 'errors.input.html.twig' with {'errors': form_errors(form.name), 'input': form.name, 'isSubmitted': isSubmitted} %}
+                </div>
+
+                <label class="form-label">Price:</label>
+                {% include 'errors.label.html.twig' with {'errors': form_errors(form.price)} %}
+                <div class="mb-4 parent-field">
+                  <span class="input-group-text">
+                    <i class="fa fa-dollar-sign"></i>
+                  </span>
+                    {% include 'errors.input.html.twig' with {'errors': form_errors(form.price), 'input': form.price, 'isSubmitted': isSubmitted} %}
+                </div>
+
+                <label class="form-label">Code:</label>
+                {% include 'errors.label.html.twig' with {'errors': form_errors(form.code)} %}
+                <div class="mb-4 parent-field">
+                  <span class="input-group-text fw-bold">
+                    <i class="fa fa-hashtag"></i>
+                  </span>
+                    {% include 'errors.input.html.twig' with {'errors': form_errors(form.code), 'input': form.code, 'isSubmitted': isSubmitted} %}
+                </div>
+
+                <label class="form-label">Choose the category:</label>
+                {% include 'errors.label.html.twig' with {'errors': form_errors(form.category)} %}
+                <div class="mb-5 parent-field">
+                  <span class="input-group-text">
+                      <i class="fa fa-tags"></i>
+                  </span>
+                    {{ form_row(form.category) }}
+                </div>
+
+                <div class="mb-4 mt-2">
+                    <div class="mb-1 parent-field">
+                      <span class="input-group-text">
+                        <i class="fa fa-file-signature"></i>
+                      </span>
+                        <label class="form-control border-0 form-label">Description:</label>
+                    </div>
+                    {% include 'errors.label.html.twig' with {'errors': form_errors(form.description)} %}
+                    {% include 'errors.input.html.twig' with {'errors': form_errors(form.description), 'input': form.description, 'isSubmitted': isSubmitted} %}
+                </div>
+
+                <label class="form-label">Choose the image:</label>
+                {% include 'errors.label.html.twig' with {'errors': form_errors(form.imageUrl)} %}
+                <div class="mb-5 parent-field">
+                  <span class="input-group-text">
+                      <i class="fa fa-image"></i>
+                  </span>
+                    {{ form_widget(form.imageUrl) }}
+                </div>
+
+                <div class="mb-4 text-center">
+                    <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+ {{ form_end(form) }}

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="container-fluid ">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="{{ asset('images/Data-Security.png') }}"
+                         class="img-fluid" alt="">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <img src="{{ asset('images/login-icon-removebg-preview.png') }}"
+                         class="img-fluid" alt="">
+                    <h3 class="text-center">Sign in</h3>
+                    <div class="form-outline mb-4">
+                        <form method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                </div>
+                            {% endif %}
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                            <label class="form-label" for="inputEmail">Email</label>
+
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+                            <label class="form-label" for="inputPassword">Password</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="inputRemenberMe" />
+                                    <label class="form-check-label" for="inputRemenberMe">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="#!" class="text-body">Forgot password?</a>
+                            </div>
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <button class="btn btn-lg btn-primary" type="submit">
+                                    Sign in
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+
+                        <p class="fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                                                                                    class="link-danger">Register</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

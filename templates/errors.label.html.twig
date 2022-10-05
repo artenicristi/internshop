@@ -1,0 +1,6 @@
+{% if errors|length > 0 %}
+    <div class="alert alert-danger mb-1 p-1">
+        <b>ERRORS</b>
+        <small>{{ errors|raw }}</small>
+    </div>
+{% endif %}

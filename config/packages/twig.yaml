@@ -1,0 +1,13 @@
+twig:
+    default_path: "%kernel.project_dir%/templates"
+    paths:
+        "%kernel.project_dir%/public/images": images
+    globals:
+        config : 
+            imagesBasePath: "/images/modified"
+            defaultImagePath: "/images/noimage.jpeg"
+
+
+when@test:
+    twig:
+        strict_variables: true

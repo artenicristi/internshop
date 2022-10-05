@@ -1,0 +1,24 @@
+<h3>Your order status has been updated to '{{ status }}'</h3>
+<p>This is your list of items ordered</p>
+
+<table class="table table-borderless text-white" style="border-spacing: 30px">
+    <thead style="color: rgb(225, 132, 95)">
+    <tr>
+        <th>Code</th>
+        <th>Price</th>
+        <th>Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for item in order.items %}
+        <tr>
+            <th>{{ item.productCode }}</th>
+            <th>${{ item.price }}</th>
+            <th>{{ item.amount }}</th>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<p>Total: <b>${{ order.total }}</b></p>

@@ -1,0 +1,117 @@
+<div class="order-window hidden">
+    <button class="close-modal">&times;</button>
+    <h1 class="text-center">Your order details</h1>
+
+    <form action="{{ url('cart.checkout') }}" method="post">
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label for="validationDefault02">Address</label>
+                <input name="address" type="text" class="form-control" id="validationDefault02" placeholder="Address">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault03">City</label>
+                <input name="city" type="text" class="form-control" id="validationDefault03" placeholder="City"
+                       required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationDefault04">Country</label>
+                <input name="country" type="text" class="form-control" id="validationDefault04" placeholder="Country"
+                       required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationDefault05">Postal code</label>
+                <input name="postalCode" type="text" class="form-control" id="validationDefault05" placeholder="Postal code" required>
+            </div>
+        </div>
+
+        <div class="window-items my-5">
+        </div>
+
+        <h4>Total: 434 $</h4>
+        <input name="total" type="hidden" value="434">
+
+        <div class="my-5">
+            <span>Payment Method</span>
+            <div class="card">
+                <div class="accordion" id="accordionPayment">
+
+                    <div class="card">
+                        <div class="card-header p-0">
+                            <h2 class="mb-0">
+                                <button class="btn-cash btn btn-light btn-block text-left p-3 rounded-0"
+                                        type="button">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <span>
+                                                <input class="input-cash" type="checkbox">
+                                                Cash
+                                            </span>
+                                            <img src="{{ asset('images/cash.png') }}" width="30">
+                                        </div>
+                                </button>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header p-0" id="headingOnePayment">
+                            <h2 class="mb-0">
+                                <button class="btn-card btn btn-light btn-block text-left collapsed p-3 rounded-0"
+                                        type="button" data-toggle="collapse" data-target="#collapseOnePayment"
+                                        aria-expanded="false" aria-controls="collapseOnePayment">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span>
+                                             <input class="input-card" type="checkbox">
+                                            Credit card
+                                        </span>
+                                        <div class="icons">
+                                            <img src="{{ asset('images/mastercard.png') }}" width="30">
+                                            <img src="{{ asset('images/visa.png') }}" width="30">
+                                            <img src="{{ asset('images/stripe.png') }}" width="30">
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOnePayment" class="collapse" aria-labelledby="headingOne"
+                             data-parent="#accordionPayment">
+                            <div class="card-body">
+                                <span class="font-weight-normal card-text">Card Number</span>
+                                <div class="input">
+                                    <i class="fa fa-credit-card"></i>
+                                    <input type="text" class="form-control" placeholder="0000 0000 0000 0000">
+                                </div>
+                                <div class="row mt-3 mb-3">
+                                    <div class="col-md-6">
+                                        <span class="font-weight-normal card-text">Expiry Date</span>
+                                        <div class="input">
+                                            <i class="fa fa-calendar"></i>
+                                            <input type="text" class="form-control" placeholder="MM/YY">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="font-weight-normal card-text">CVC/CVV</span>
+                                        <div class="input">
+                                            <i class="fa fa-lock"></i>
+                                            <input type="text" class="form-control" placeholder="000">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row justify-content-center">
+            <div class="col-6">
+                <button class="btn btn-primary btn-order" type="submit">Submit order</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="overlay hidden"></div>

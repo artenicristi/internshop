@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    {{ encore_entry_link_tags('app') }}
+
+</head>
+<body>
+
+{% include 'frontend/home_page/header.html.twig' %}
+{% include 'frontend/home_page/cart.html.twig' %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">{{ message }}</div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
+{% endfor %}
+{% block body %}
+{% endblock %}
+
+    {% include 'frontend/home_page/footer.html.twig' %}
+
+    <script>
+        const User = {
+            isLoggedIn : {{app.user != null ? 'true' : 'false'}},
+        };
+        const Config = {{ config | json_encode | raw }};
+        const EventsToDispatch = {{ app.flashes('events') | json_encode | raw }};
+    </script>
+    {{ encore_entry_script_tags('app') }}
+
+</body>
+</html>
+
+

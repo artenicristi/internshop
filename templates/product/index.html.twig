@@ -1,0 +1,112 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+    <body style="background-color: rgba(35,35,35,255)"></body>
+
+    <div class="row justify-content-between m-4">
+        <h1 style="color: whitesmoke" id="title">Products</h1>
+        <a href="{{ path('app_product_new') }}" class="btn btn-secondary align-self-center">Create product</a>
+    </div>
+
+    <table class="table text-white" id="product-table">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <tr class="text-center">
+            <form>
+                <td></td>
+                <td>
+                    <input name="name" type="text" style="width: 100px" class="form-control-sm" value="{{ app.request.get('name') }}">
+                </td>
+                <td>
+                    <div class="flex-row mx-0 align-items-center justify-content-center">
+                        <div>
+                            <input name="from" type="number" placeholder="min" min="0" max="99999" class="form-control-sm text-center" value="{{ app.request.get('from') }}">
+                        </div>
+                            <span>-</span>
+                        <div>
+                            <input name="to" type="number" placeholder="max" min="0" max="99999" class="form-control-sm text-center" value="{{ app.request.get('to') }}">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <input name="code" type="text" style="width: 90px" class="form-control-sm" value="{{ app.request.get('code') }}">
+                </td>
+                <td></td>
+                <td>
+                    <input list="categories" name="category" class="form-control-sm" style="width: 90px" value="{{ app.request.get('category') }}">
+                    <datalist id="categories" style="height: 50px; overflow: auto">
+                        {% for category in categories %}
+                            <option value="{{ category.name }}"></option>
+                        {% endfor %}
+                    </datalist>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                    <button class="btn btn-warning">Search</button>
+                </td>
+            </form>
+        </tr>
+
+        {% for product in products %}
+            <tr class="text-center">
+                <td>{{ product.id }}</td>
+                <td>
+                    {% if (product.imageUrl)  %}
+                        <div class="tooltip-img text-center">
+                            {{ product.name }}
+                            <span class="tt-img text-dark "><img src="{{ asset('images/modified/' ~ product.imageUrl) }}" width=150px height=130px /><br> </span>
+                        </div>
+                    {% else %}
+                        <div class="tooltip-img">{{ product.name }}
+                            <span class="tt-img text-dark "><img src="{{ asset('images/noimage.jpeg') }}" width=150px height=130px /><br> </span>
+                        </div>
+                    {% endif %}
+                </td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.code }}</td>
+                <td class="text-left" style="word-wrap: break-word; max-width: 200px;">{{ product.description | ellipsify(40) }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="row justify-content-center action-buttons" style="flex-wrap: nowrap">
+                        <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn mr-2 text-white" id="show-btn">
+                            <i class="gg-eye mt-2"></i>
+                        </a>
+                        <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn text-warning mr-2" id="edit-btn">
+                            <i class="gg-pen"></i>
+                        </a>
+                        {{ include('product/_delete_trash_icon_form.html.twig') }}
+                    </div>
+                </td>
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="container-fluid">
+        <div class="row justify-content-end m-1">
+            {{ knp_pagination_render(products) }}
+        </div>
+    </div>
+
+{% endblock %}

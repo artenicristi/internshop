@@ -1,0 +1,51 @@
+<header>
+    <nav id="navbar_top" class="navbar navbar-expand-lg col-sm bg-dark">
+        <a class="navbar-brand text-light" href="{{ url('home') }}">
+            <img src="{{ asset('images/cart.png') }}">
+            <span class="nav-text">InternShop</span>
+        </a>
+        <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+            <div class="col-md-6">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link text-light" href="{{ url('home') }}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-light" href="{{ url('contacts') }}">Contacts <span class="sr-only"></span></a>
+                    </li>
+                    {% if app.user %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-light" href="{{ url('user.cabinet') }}">User Cabinet <span class="sr-only"></span></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <form class="d-flex justify-content-center mr-1" action="{{ path('home') }}">
+                <div class="input-group">
+                    <input type="name" class="form-control" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button">
+                            <i class="gg-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            {% if app.user %}
+                <a class="cart-icon mr-1 ml-1 d-none d-lg-block icon-link" title="Your cart" href="#" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="1.7rem" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                    </svg>
+                </a>
+                <a href="{{ path('app_logout') }}" title="Logout" class="ml-1 btn-link logout icon-link"><i class="gg-log-out"></i></a>
+            {% else %}
+                <a href="{{ url('app_login') }}"  title="Login" class="ml-1 btn-link login icon-link"><i class="gg-log-in"></i></a>
+            {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>

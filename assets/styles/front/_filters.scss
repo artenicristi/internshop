@@ -1,0 +1,24 @@
+.filter-sidebar{
+    .filter-price{
+        width:70px;
+        margin: 5px;
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+        margin: 0 5px;  
+    }
+    
+    #price-span{
+        margin: auto;
+    }
+    
+    #filter-code{
+        width:160px;
+    }
+    .filter-category{
+        width:160px;
+    }
+    
+    .filter-row{
+        margin-bottom: $spacer;
+    }
+}

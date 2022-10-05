@@ -1,0 +1,69 @@
+{{ form_start(form) }}
+{{ form_row(form._token) }}
+
+<div class="container-fluid my-4">
+
+    <div class="text-center">
+        {% if user.id is not null %}
+            <h2>User #{{ user.id }}</h2>
+        {% else %}
+            <h2>Create new User</h2>
+        {% endif %}
+        <p class="lead">You can {{ action }} the information about this User</p>
+    </div>
+
+    <div class="row justify-content-center my-5">
+        <div class="col-6">
+            <form>
+
+                <label class="form-label">Email:</label>
+                <div class="parent-field mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-bookmark"></i>
+                  </span>
+                    <div class="child-field">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <label class="form-label">User Name:</label>
+                <div class="parent-field mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-bookmark"></i>
+                  </span>
+                    <div class="child-field">
+                        {{ form_widget(form.userName) }}
+                    </div>
+                </div>
+                <div class="parent-field mb-4">
+                    <div class="child-field">
+                        {{ form_widget(form.password) }}
+                    </div>
+                </div>
+                <label class="form-label">New Password:</label>
+                <div class="parent-field mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-bookmark"></i>
+                  </span>
+                    <div class="child-field">
+                        {{ form_widget(form.newPassword) }}
+                    </div>
+                </div>
+
+                <label class="form-label">Choose the role:</label>
+                <div class="mb-5 parent-field">
+                  <span class="input-group-text">
+                      <i class="fa fa-tags"></i>
+                  </span>
+                    {{ form_widget(form.roles) }}
+                </div>
+
+                <div class="mb-4 text-center">
+                    <button class="btn btn-secondary ">{{ button_label|default('Save') }}</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}

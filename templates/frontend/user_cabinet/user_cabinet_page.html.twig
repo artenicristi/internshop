@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Cabinet!{% endblock %}
+
+{% block body %}
+
+<div class="container cabinet " >
+    <div class="row mt-5 mb-4 ">
+        <div class="col-lg-3 col-sm-6 mb-6 user-info text-secondary ">
+            <img class="user-icon" src="{{ asset('images/user-removebg-preview.png') }}">
+            <h5 class="user-name">{{ app.user.userName }}</h5>
+            {% if app.user and 'ROLE_ADMIN' in app.user.roles%}
+                <div class="admin-link">
+                <a href="{{ path('app_product_index') }}" class="btn btn-primary ">Admin Panel</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-9 orders">
+            {% include 'frontend/user_cabinet/orders_table.html.twig'  %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

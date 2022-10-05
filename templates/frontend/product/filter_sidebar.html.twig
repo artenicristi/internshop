@@ -1,0 +1,28 @@
+{% block body %}
+    <form action="{{url('home')}}" method="GET" class="filter-sidebar">
+    <h3 class="title">Filters</h3>
+    <div class="flex-row mx-0 align-items-center justify-content-center">
+        <label for="price" class="form-label" id="price-label">Price</label>
+        <div class="form-row" id="price">
+            <input name="from" type="number"  placeholder="min" min="0" max="99999" class="filter-price form-control text-center" value="{{ app.request.get('from') }}">
+            <span id="price-span"> - </span>
+            <input name="to" type="number"  placeholder="max" min="0" max="99999" class="filter-price form-control text-center" value="{{ app.request.get('to') }}">
+        </div>
+    </div>
+    <div>
+        <label for="filter-code" class="form-label" id="code">Code</label>
+        <input name="code" type="text" class="form-control " id="filter-code" value="{{ app.request.get('code') }}">
+    </div>
+    <div>
+        <label for="category-select" class="form-label" id="category">Category</label>
+        <select  class="filter-category form-select form-control" name="category" id="category-select" value="{{ app.request.get('category') }}" >
+            <option selected disabled value="">Choose...</option>
+            {% for category in categories %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button class="btn btn-block btn-warning mt-3">Search</button>
+    </form>
+
+{% endblock %}

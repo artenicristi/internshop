@@ -1,0 +1,7 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+#route_name:
+#    path: /products
+#    controller: App\Controller\ProductController::getProducts

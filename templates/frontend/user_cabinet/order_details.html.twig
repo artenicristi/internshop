@@ -1,0 +1,103 @@
+{% extends './base.html.twig' %}
+
+{% block body %}
+<div class="container cabinet " >
+    <div class="row mt-5 mb-4 ">
+        <div class="col-lg-3 col-sm-6 mb-6 user-info text-secondary">
+            <img class="user-icon" src="{{ asset('images/user-removebg-preview.png') }}">
+            <h5 class="user-name">{{ app.user.userName }}</h5>
+            {% if app.user and 'ROLE_ADMIN' in app.user.roles%}
+                <div class="admin-link">
+                <a href="{{ path('app_product_index') }}" class="btn btn-primary">Admin Panel</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-9 orders">
+            <div class="row justify-content-between m-4">
+                <h1>Order #{{ order.id }}</h1>
+                <div class="row justify-content-between align-self-center">
+                    <a href="{{ path('user.cabinet') }}" class="btn btn-secondary ml-2 mr-2">Back to list</a>
+                </div>
+            </div>
+
+            <table class="table text-dark">
+                <tbody>
+                <tr>
+                    <th class="label-color font-weight-normal">Total</th>
+                    <td>${{ order.total }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Items</th>
+                    <td>
+
+                        <table class="table table-borderless ">
+                            <thead style="color: rgb(225, 132, 95)">
+                            <tr>
+                                <th>Code</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for item in order.items %}
+                                <tr>
+                                    <th class="font-weight-normal">{{ item.productCode }}</th>
+                                    <th class="font-weight-normal">${{ item.price }}</th>
+                                    <th class="font-weight-normal">{{ item.amount }}</th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Status</th>
+                    <td>{{ order.status }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">CreatedAt</th>
+                    <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">UpdatedAt</th>
+                    <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Country</th>
+                    <td>{{ order.address.country }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">City</th>
+                    <td>{{ order.address.city }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Street</th>
+                    <td>{{ order.address.street }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">PostalCode</th>
+                    <td>{{ order.address.postalCode }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Payment type</th>
+                    <td>{{ order.paymentDetails.type }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Card code</th>
+                    <td>{{ order.creditCardDetails.code }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Card cvv</th>
+                    <td>{{ order.creditCardDetails.cvv }}</td>
+                </tr>
+                <tr>
+                    <th class="label-color font-weight-normal">Card expiresAt</th>
+                    <td>{{ order.creditCardDetails.expiresAt ? order.creditCardDetails.expiresAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

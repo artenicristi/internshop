@@ -1,0 +1,8 @@
+ - [x] Pagination styles
+ - [x] Grid heading styles
+ - [x] Filters styles
+ - [x] Contact page styles
+ - [x] Login page styles
+ - [-] Checkout form styles
+ - [ ] Checkout payment details validation
+ - [ ] Truncate product descriptio or move it to a tooltip?

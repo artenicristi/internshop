@@ -1,0 +1,18 @@
+.cabinet{
+    min-height: 100vh;
+    padding-top: 4rem;
+    .user-icon {
+        width: 150px;
+        height: 150px;
+        margin-left: 3rem;
+        margin-right: 3rem;
+        margin-bottom: 1rem;
+    }
+    .user-name{
+        padding-left: 5rem;
+    }
+    .admin-link{
+        padding-left: 4rem;
+    }
+
+}

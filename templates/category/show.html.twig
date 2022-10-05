@@ -1,0 +1,38 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+    <body class="back-grey"></body>
+
+    <div class="row justify-content-between m-4">
+        <h1 style="color: whitesmoke">Category #{{ category.id }}</h1>
+        <div class="row justify-content-between align-self-center">
+            <a href="{{ path('app_category_index') }}" class="btn btn-secondary ml-2 mr-2">Back to list</a>
+            <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-secondary ml-2 mr-2">Edit</a>
+            {{ include('category/_delete_button_form.html.twig') }}
+        </div>
+    </div>
+
+    <table class="table text-white">
+        <tbody>
+            <tr>
+                <th class="label-color font-weight-normal">Name</th>
+                <td>{{ category.name }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">Parent category</th>
+                <td>{{ category.parentId }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">Created_at</th>
+                <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="font-weight-normal label-color">UpdatedAt</th>
+                <td>{{ category.updatedAt ? category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+
+

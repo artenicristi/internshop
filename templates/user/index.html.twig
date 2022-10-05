@@ -1,0 +1,60 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <body class="back-grey"></body>
+    <div class="row justify-content-between m-4">
+        <h1 style="color: whitesmoke" id="title"> Users </h1>
+        <a href="{{ path('app_user_new') }}" class="btn btn-secondary align-self-center">Create User</a>
+    </div>
+
+    <table class="table text-white" id="user-table">
+        <thead class="thead-dark">
+        <tr class="text-center">
+            <th>Id</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>User Name</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr class="text-center">
+                <td>{{ user.id }}</td>
+                <td>{{ user.email}}</td>
+                <td>{% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}</td>
+                <td>{{ user.userName }}</td>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="row justify-content-center action-buttons">
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn mr-2 text-white">
+                            <i class="gg-eye mt-2" ></i>
+                        </a>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn mr-2 text-warning">
+                            <i class="gg-pen" ></i>
+                        </a>
+                        {{ include('user/_delete_trash_icon_form.html.twig') }}
+                    </div>
+                </td>
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="container-fluid">
+        <div class="row justify-content-end m-1">
+            {{ knp_pagination_render(users) }}
+        </div>
+    </div>
+
+{% endblock %}

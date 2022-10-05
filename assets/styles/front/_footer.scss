@@ -1,0 +1,30 @@
+footer {
+    margin-top: $spacer * 5;
+    background-color: $gray-900;
+    ul li, a{
+        color: $gray-600;
+    }
+    a:hover{
+        text-decoration: none;
+        color: $secondary;
+    }
+
+    .footer-ribbon{
+        background-color: rgba(255, 255, 255, 0.05);
+        a:hover{
+            background-color: transparent;
+            color: transparent;
+        }
+        i:hover{
+            color: $light !important;
+        }
+    }
+    i{
+        color: $secondary;
+        display: inline-flex !important;
+    }
+
+    .socials i{
+        margin-right: 5px;
+    }
+}

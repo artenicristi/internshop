@@ -1,0 +1,107 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Order index{% endblock %}
+
+{% block body %}
+    <body class="back-grey"></body>
+
+    <h1 class="m-4" style="color: whitesmoke">Orders</h1>
+
+    <table class="table text-white">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th>Id</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <tr class="text-center">
+            <form>
+                <td></td>
+                <td>
+                    <div class="flex-row mx-0 align-items-center justify-content-center">
+                        <div>
+                            <input name="from" type="number" placeholder="min" min="0" class="form-control-sm text-center" value="{{ app.request.get('from') }}">
+                        </div>
+                        <span>-</span>
+                        <div>
+                            <input name="to" type="number" placeholder="max" min="0" class="form-control-sm text-center" value="{{ app.request.get('to') }}">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <input list="orders" name="status" class="form-control-sm" style="width: 110px" value="{{ app.request.get('status') }}">
+                    <datalist id="orders" style="height: 50px; overflow: auto">
+                        <option value="new"></option>
+                        <option value="in-progress"></option>
+                        <option value="shipping"></option>
+                        <option value="closed"></option>
+                        <option value="canceled"></option>
+                    </datalist>
+                </td>
+                <td>
+                    <div class="flex-row mx-0 align-items-center justify-content-center">
+                        <div>
+                            <input name="createdAtFrom" type="date" style="width: 130px" class="form-control-sm" placeholder="date" value="{{ app.request.get('createdAtFrom') }}">
+                        </div>
+                        <span>-</span>
+                        <div>
+                            <input name="createdAtTo" type="date" style="width: 130px" class="form-control-sm" placeholder="date" value="{{ app.request.get('createdAtTo') }}">
+                        </div>
+                    </div>
+                </td>
+                <td></td>
+                <td>
+                    <button class="btn btn-warning">Search</button>
+                </td>
+            </form>
+        </tr>
+
+        {% for order in orders %}
+            <tr class="text-center">
+                <td>{{ order.id }}</td>
+                <td>${{ order.total }}</td>
+                <td data-order-id="{{ order.id }}" data-field="status">{{ order.status }}</td>
+                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+
+                    <div class="row justify-content-center">
+                        <a href="{{ path('admin.order.show', {'id': order.id}) }}" class="btn btn-outline-info text-white m-1"> Details </a>
+                        {% if order.status != 'closed' and order.status != 'canceled' %}
+                            <a data-order-id="{{ order.id }}" data-button="status" class="btn btn-outline-success text-white m-1 status" style="min-width: 150px">
+                                {% if order.status == 'new' %}
+                                    Take into work
+                                {% elseif order.status == 'in-progress'%}
+                                    Ship to customer
+                                {% elseif order.status == 'shipping'%}
+                                    Close
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                        {% if order.status != 'canceled' %}
+                            <a data-order-id="{{ order.id }}" class="btn btn-outline-danger text-white m-1 cancel">Cancel</a>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="container-fluid">
+        <div class="row justify-content-end m-1">
+            {{ knp_pagination_render(orders) }}
+        </div>
+    </div>
+
+{% endblock %}

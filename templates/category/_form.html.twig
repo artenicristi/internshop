@@ -1,0 +1,45 @@
+{{ form_start(form) }}
+{{ form_row(form._token) }}
+
+<div class="container-fluid my-4">
+
+    <div class="text-center">
+        {% if category.id is not null %}
+            <h2>Category #{{ category.id }}</h2>
+        {% else %}
+            <h2>Create new Category</h2>
+        {% endif %}
+        <p class="lead">You can {{ action }} the information about this category</p>
+    </div>
+
+    <div class="row justify-content-center my-5">
+        <div class="col-6">
+            <form>
+
+                <label class="form-label">Name:</label>
+                <div class="parent-field mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-bookmark"></i>
+                  </span>
+                    <div class="child-field">
+                        {{ form_row(form.name) }}
+                    </div>
+                </div>
+
+                <div class="mb-5 parent-field">
+                  <span class="input-group-text">
+                      <i class="fa fa-tags"></i>
+                  </span>
+                    {{ form_row(form.parentId) }}
+                </div>
+
+                <div class="mb-4 text-center">
+                    <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}
