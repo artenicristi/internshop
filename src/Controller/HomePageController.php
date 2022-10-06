@@ -40,27 +40,8 @@ class HomePageController extends AbstractController
     #[Route('/details/{id}', 'product.details', methods: ['GET', 'POST'])]
     public function productDetails(Product $product, Request $request, MailerInterface $mailer): Response
     {
-        $form = $this->createForm(ProductContactType::class);
-        $contact = $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $email = (new TemplatedEmail())
-                ->from('project@gmail.com')
-                ->to('admin@internshop.com')
-                ->subject('New Order')
-                ->htmlTemplate('frontend/product/order_email.html.twig')
-                ->context([
-                    'product_code' => $product->getCode(),
-                    'product' => $product,
-                    'mail' => $contact->get('email')->getData(),
-                    'text' => $contact->get('text')->getData(),
-                ]);
-            $mailer->send($email);
-            $this->addFlash('success', 'Order sent');
-            return $this->redirectToRoute('product.details', ['id' => $product->getId()]);
-        }
         return $this->render('frontend/product/details.html.twig', [
             'product' => $product,
-            'form' => $form->createView()
         ]);
     }
 
@@ -112,8 +93,6 @@ class HomePageController extends AbstractController
 
         return $this->redirectToRoute('user.cabinet');
     }
-
-
 
     #[Route('/cabinet', 'user.cabinet', methods:'GET')]
     public function getUserCabinet(OrderService $orderService, Request $request):Response{

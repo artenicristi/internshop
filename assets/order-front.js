@@ -62,7 +62,7 @@ $(function () {
         let data = new FormData();
         data.append('status', 'canceled');
 
-        fetch(`http://localhost:8083/cabinet/${id}/status`, {
+        fetch(`http://localhost:5000/cabinet/${id}/status`, {
             method: 'POST',
             body: data
         })

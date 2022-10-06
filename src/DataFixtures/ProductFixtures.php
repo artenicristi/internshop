@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Product;
-use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -34,7 +33,7 @@ class ProductFixtures extends Fixture
         $categories = [];
         foreach (range(0, 15) as $productIndex) {
             $categories[] = $category = new Category();
-            $category->setName($faker->fruitName() . " " . $faker->companySuffix());
+            $category->setName($faker->fruitName().' '.$faker->companySuffix());
 
             $manager->persist($category);
         }
@@ -43,17 +42,17 @@ class ProductFixtures extends Fixture
 
         /** @var SplFileInfo[]|Traversable $files */
         $files = (new Finder())
-            ->in($this->parameterBag->get('kernel.project_dir') . "/public/images/modified")
-            ->name(["*.jpg", "*.png"])
+            ->in($this->parameterBag->get('kernel.project_dir').'/public/images/modified')
+            ->name(['*.jpg', '*.png'])
             ->getIterator();
 
-        $images = array_map(fn(SplFileInfo $file) => $file->getRelativePathname(), iterator_to_array($files));
+        $images = array_map(fn (SplFileInfo $file) => $file->getRelativePathname(), iterator_to_array($files));
 
         foreach (range(0, 100) as $productIndex) {
             $product = new Product();
-            $product->setCode(strtoupper($faker->bothify("??_####")))
+            $product->setCode(strtoupper($faker->bothify('??_####')))
                 ->setName($faker->foodName())
-                ->setPrice($faker->numerify("##.##"))
+                ->setPrice($faker->numerify('##.##'))
                 ->setDescription($faker->realTextBetween(150, 250))
                 ->setCategory($faker->randomElement($categories))
                 ->setImageUrl($faker->randomElement($images));

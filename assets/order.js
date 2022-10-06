@@ -20,7 +20,7 @@ $(function () {
         let data = new FormData();
         data.append('status', newFieldStatus);
 
-        fetch(`http://localhost:8083/admin/order/${id}/status`, {
+        fetch(`http://localhost:5000/admin/order/${id}/status`, {
             method: 'POST',
             body: data
         })
@@ -43,7 +43,7 @@ $(function () {
         let data = new FormData();
         data.append('status', 'canceled');
 
-        fetch(`http://localhost:8083/admin/order/${id}/status`, {
+        fetch(`http://localhost:5000/admin/order/${id}/status`, {
             method: 'POST',
             body: data
         })
